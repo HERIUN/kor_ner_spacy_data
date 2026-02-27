@@ -18,7 +18,7 @@
 - 링크: [AIHub - 관광 특화 말뭉치 데이터](https://aihub.or.kr/aihubdata/data/view.do?pageIndex=1&currMenu=115&topMenu=100&srchOptnCnd=OPTNCND001&searchKeyword=%EA%B0%9C%EC%B2%B4%EB%AA%85&srchDetailCnd=DETAILCND001&srchOrder=ORDER001&srchPagePer=20&aihubDataSe=data&dataSetSn=71714)
 - 로컬 경로: `094.관광_특화_말뭉치_데이터/`
 
-#### 다운로드 및 압축 해제
+#### 다운로드
 
 ```bash
 aihubshell -aihubapikey $AIHUB_API_KEY -mode d -datasetkey 71714 -filekey 524644
@@ -107,7 +107,7 @@ done
 ---
 
 ### 4. 말뭉치 - 형태소_개체명
-
+- 링크: [GitHub - 한국해양대 ner데이터](https://github.com/kmounlp/NER)
 - 로컬 경로: `NER/말뭉치 - 형태소_개체명/`
 
 #### 포맷
