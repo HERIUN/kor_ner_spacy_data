@@ -1,5 +1,7 @@
 # 데이터 준비 (data_prepare)
 
+> 변환된 데이터셋: [🤗 HERIUN/kor-ner-spacy-data](https://huggingface.co/datasets/HERIUN/kor-ner-spacy-data)
+
 ## 데이터셋 목록
 
 | # | 데이터셋 | 변환 스크립트 | 출력 파일 |
