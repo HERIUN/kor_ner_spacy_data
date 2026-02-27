@@ -29,7 +29,7 @@
 
 기본값:
   --input  : data_prepare/NER/말뭉치 - 형태소_개체명
-  --output : data_prepare/converted/morpheme_ner_dataset.jsonl
+  --output : data_prepare/converted/kmou_ner_dataset.jsonl
 """
 
 import re
@@ -40,7 +40,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).parent
 
 DEFAULT_INPUT  = BASE_DIR / "NER/말뭉치 - 형태소_개체명"
-DEFAULT_OUTPUT = BASE_DIR / "converted" / "morpheme_ner_dataset.jsonl"
+DEFAULT_OUTPUT = BASE_DIR / "converted" / "kmou_ner_dataset.jsonl"
 
 # None: 제거, 값 있음: 해당 레이블로 변환
 TAG_MAP: dict[str, str | None] = {

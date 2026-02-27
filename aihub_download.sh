@@ -10,6 +10,5 @@ for key in $(seq 441710 441722); do
 done
 
 
-# 온라인 구어체 말뭉치 데이터
-
-aihubshell -aihubapikey $AIHUB_API_KEY -mode d -datasetkey 625 -filekey 62288
+# 온라인 구어체 말뭉치 데이터(low quality don't use )
+# aihubshell -aihubapikey $AIHUB_API_KEY -mode d -datasetkey 625 -filekey 62288

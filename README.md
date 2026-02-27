@@ -7,7 +7,7 @@
 | 1 | 관광 특화 말뭉치 (AIHub 094) | `094_convert_to_ner.py` | `converted/094_ner_dataset.jsonl` |
 | 2 | 전시 공연 도슨트 (AIHub 208) | `208_convert_to_ner.py` | `converted/208_ner_dataset.jsonl` |
 | 3 | naver_ner (네이버 NER) | `naver_convert_to_ner.py` | `converted/naver_ner_dataset.jsonl` |
-| 4 | 한국해양대 말뭉치 - 형태소_개체명 | `kmou_convert_to_ner.py` | `converted/morpheme_ner_dataset.jsonl` |
+| 4 | 한국해양대 말뭉치 - 형태소_개체명 | `kmou_convert_to_ner.py` | `converted/kmou_ner_dataset.jsonl` |
 
 ---
 
