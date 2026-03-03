@@ -25,7 +25,7 @@
   - 엔티티 없는 문장은 출력하지 않음
 
 사용법:
-  python3 etri_kmou_convert.py [--input INPUT_DIR] [--output OUTPUT_FILE]
+  python3 kmou_convert_to_ner.py [--input INPUT_DIR] [--output OUTPUT_FILE]
 
 기본값:
   --input  : data_prepare/NER/말뭉치 - 형태소_개체명

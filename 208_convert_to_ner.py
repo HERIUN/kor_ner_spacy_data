@@ -34,6 +34,7 @@ import json
 import argparse
 from pathlib import Path
 
+
 DEFAULT_INPUT = Path(__file__).parent / (
     "208.전시_공연_도슨트_데이터/01-1.정식개방데이터/Training/02.라벨링데이터"
 )
@@ -41,21 +42,6 @@ DEFAULT_OUTPUT = Path(__file__).parent / "converted" / "208_ner_dataset.jsonl"
 
 TYPE_LABELS = {0: "DAT", 1: "LOC", 2: "ORG", 3: "PER", 4: "QT", 5: "TIM", 6: "DAT"}
 
-
-def _merge_adjacent(text: str, entities: list) -> list:
-    """같은 라벨의 연속 엔티티 중 사이 갭이 공백만 있으면 하나로 병합."""
-    if len(entities) < 2:
-        return entities
-    sorted_ents = sorted(entities, key=lambda e: e[0])
-    merged = [list(sorted_ents[0])]
-    for s, e, lbl in sorted_ents[1:]:
-        prev = merged[-1]
-        gap = text[prev[1]:s]
-        if prev[2] == lbl and gap.strip() == "":
-            merged[-1][1] = e
-        else:
-            merged.append([s, e, lbl])
-    return merged
 
 
 def convert_file(json_path: Path) -> dict:
@@ -98,7 +84,7 @@ def convert_file(json_path: Path) -> dict:
         entities.append([start, end, tag])
         used.add((start, end))
 
-    return {"text": text, "entities": _merge_adjacent(text, entities)}
+    return {"text": text, "entities": entities}
 
 
 def convert_directory(input_dir: Path, output_file: Path) -> None:

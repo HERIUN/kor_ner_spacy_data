@@ -23,7 +23,7 @@
   O-PS → PER    O-LC → LOC    O-OG → ORG    O-DT → DAT
   A-AD → ADD    A-PO → ADD    A-TE → PHN    A-TI → TIM    A-DA → DAT
   O-QT → QT
-  A-TM → URL (URL계열) / EML (이메일) / LOC (순수 지역명) / 제거 (garbage)
+  A-TM → URL (URL계열) / LOC (순수 지역명) / 제거 (garbage)
   E-*/O-AF/O-CV/O-AM/O-PT/O-TR/O-EV/A-ET/A-PR/A-TR/A-UN → 제거
 
 사용법:
@@ -38,6 +38,7 @@ import json
 import re
 import argparse
 from pathlib import Path
+
 
 DEFAULT_INPUT = Path(__file__).parent / (
     "094.관광_특화_말뭉치_데이터/3.개방데이터/1.데이터/Training/02.라벨링데이터"
@@ -93,8 +94,6 @@ def _atm_to_tag(text: str) -> str | None:
     _NON_LOC     = re.compile(r"관광|여행|포털|없음|홈페이지|비짓|visit", re.I)
     _VERB_ENDING = re.compile(r"(하는|하다|이다|하며|하고|하면|이고|이며|하기|스러운|스럽다|올구양)$")
 
-    if "@" in text:
-        return "EML"
     if text.startswith(("http", "www.", "ftp", "ttp:", "ttps:")):
         return "URL"
     if _DOMAIN_RE.search(text):
@@ -106,30 +105,6 @@ def _atm_to_tag(text: str) -> str | None:
         return "LOC"
     return None
 
-def _merge_adjacent(text: str, entities: list) -> list:
-    """같은 라벨의 연속 엔티티 중 사이 갭이 공백만 있으면 하나로 병합.
-
-    추가: LOC + ORG 또는 ORG + LOC 조합도 공백만 있으면 ORG로 병합.
-    (예: '경기도 수원시' LOC + '문화관광과' ORG → '경기도 수원시 문화관광과' ORG)
-    """
-    if len(entities) < 2:
-        return entities
-    sorted_ents = sorted(entities, key=lambda e: e[0])
-    merged = [list(sorted_ents[0])]
-    for s, e, lbl in sorted_ents[1:]:
-        prev = merged[-1]
-        gap = text[prev[1]:s]
-        if gap.strip() != "":
-            merged.append([s, e, lbl])
-            continue
-        if prev[2] == lbl:
-            merged[-1][1] = e
-        elif prev[2] == "LOC" and lbl == "ORG":
-            merged[-1][1] = e
-            merged[-1][2] = "ORG"
-        else:
-            merged.append([s, e, lbl])
-    return merged
 
 def convert_file(json_path: Path) -> tuple[list[dict], list[dict], list[dict], list[dict]]:
     """JSON 라벨링 파일 하나를 NER 포맷 레코드 리스트로 변환.
@@ -215,7 +190,7 @@ def convert_file(json_path: Path) -> tuple[list[dict], list[dict], list[dict], l
             entities.append([start, end, tag])
 
         if entities:
-            records.append({"text": text, "entities": _merge_adjacent(text, entities)})
+            records.append({"text": text, "entities": entities})
 
     return records, dropped, atm_log, ate_log
 

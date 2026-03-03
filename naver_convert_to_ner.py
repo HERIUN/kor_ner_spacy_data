@@ -24,7 +24,7 @@ naver_ner 학습 데이터 → NER JSONL 변환 스크립트
   CVL / TRM / EVT / ANM / AFW / FLD / PLT / MAT → 제거
 
 사용법:
-  python3 naver_ner_convert.py [--input INPUT_FILE] [--output OUTPUT_FILE]
+  python3 naver_convert_to_ner.py [--input INPUT_FILE] [--output OUTPUT_FILE]
 
 기본값:
   --input  : data_prepare/naver_ner/data/train/train_data
